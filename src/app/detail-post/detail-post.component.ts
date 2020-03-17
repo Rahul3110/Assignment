@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DetailService } from '../detail.service';
 
 @Component({
@@ -8,26 +8,29 @@ import { DetailService } from '../detail.service';
 })
 export class DetailPostComponent implements OnInit {
   public empPost = [];
-  @Input('parentData') public userId;
+  public postId;
+
 
   constructor(private detailService: DetailService) { }
 
-  ngOnInit() {
-    if(this.userId) {
-    this.myPost(this.userId);
-    }
-  }
+  ngOnInit() {    
+    if (this.detailService.subsVar==undefined) {    
+      this.detailService.subsVar = this.detailService.    
+      invokeFirstComponentFunction.subscribe((userId) => {    
+        this.myPost(userId);    
+      });    
+    }    
+  } 
 
   myPost(userId) {
-   
-    console.log("myPost:"+userId);
     this.detailService.getPost(userId)
         .subscribe(data => this.empPost = data);
-        this.userId = null;
-    
-    
   }
 
-  
+  getComments(postId){  
+    this.postId = postId;  
+    console.log("postcomponent:"+postId);
+    this.detailService.onClickComment(postId);    
+  } 
 
 }

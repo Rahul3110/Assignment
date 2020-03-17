@@ -1,5 +1,6 @@
-<p>{{ myPost(userId) }}</p>
 <ul *ngFor="let empPosts of empPost">
     <li>{{ empPosts.title }}</li>
     <li>{{ empPosts.body }}</li>
+    <button (click) ="getComments(empPosts.id)">comments {{empPosts.id}}</button>
+    <app-detail-comment ></app-detail-comment>
 </ul>

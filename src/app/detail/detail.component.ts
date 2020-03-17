@@ -9,9 +9,6 @@ import { DetailPostComponent } from '../detail-post/detail-post.component';
 })
 export class DetailComponent implements OnInit {
   public employees = [];
-  @Output() public allid = new EventEmitter();
-
-   public dc = new DetailPostComponent(this.detailService);
 
   constructor(private detailService: DetailService ) {}
 
@@ -20,10 +17,8 @@ export class DetailComponent implements OnInit {
         .subscribe(data => this.employees = data);
   }
 
-  getPost(userId) {
-    this.allid.emit(userId);
-    console.log(userId);
-    // this.dc.myPost(userId);
-  }
+  firstComponentFunction(userId){    
+    this.detailService.onFirstComponentButtonClick(userId);    
+  } 
 
 }

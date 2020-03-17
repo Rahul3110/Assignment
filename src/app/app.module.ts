@@ -7,12 +7,14 @@ import { DetailComponent } from './detail/detail.component';
 import { DetailService } from './detail.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailPostComponent } from './detail-post/detail-post.component';
+import { DetailCommentComponent } from './detail-comment/detail-comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DetailComponent,
-    DetailPostComponent
+    DetailPostComponent,
+    DetailCommentComponent
   ],
   imports: [
     BrowserModule,
