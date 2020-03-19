@@ -8,17 +8,28 @@ import { DetailPostComponent } from '../detail-post/detail-post.component';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  public employees = [];
+  employee = new Map();
 
-  constructor(private detailService: DetailService ) {}
+  constructor(private detailService: DetailService) { }
 
   ngOnInit() {
     this.detailService.getEmployee()
-        .subscribe(data => this.employees = data);
+      .subscribe(
+        (data) => this.split(data)
+      );
   }
 
-  firstComponentFunction(userId){    
-    this.detailService.onFirstComponentButtonClick(userId);    
-  } 
+
+
+  split(emp) {
+    for (var i = 0; i < emp.length; i++) {
+      this.employee.set(emp[i].name.split(" ")[0], emp[i].id);
+    }
+  }
+
+
+  firstComponentFunction(userId) {
+    this.detailService.onFirstComponentButtonClick(userId);
+  }
 
 }

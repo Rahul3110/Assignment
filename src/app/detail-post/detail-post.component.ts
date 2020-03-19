@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DetailService } from '../detail.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class DetailPostComponent implements OnInit {
       this.detailService.subsVar = this.detailService.    
       invokeFirstComponentFunction.subscribe((userId) => {    
         this.myPost(userId);    
-      });    
+      });
     }    
   } 
 
