@@ -1,6 +1,16 @@
-<ul *ngFor="let empPosts of empPost">
-    <li>{{ empPosts.title }}</li>
-    <li>{{ empPosts.body }}</li>
-    <button (click) ="getComments(empPosts.id)">comments {{empPosts.id}}</button>
-    <app-detail-comment ></app-detail-comment>
+ <div>
+<ul class="user-post" *ngFor="let userPosts of userPost; let i=index">
+        <li>{{ userPosts.title }}</li>
+        <li>{{ userPosts.body }}</li>
+        <button (click)="getComments(userPosts.id); toggle(); showSubItem(i+1)">
+            comments {{ userPosts.id }}
+        </button>
+        <div *ngIf="visibleIndex === i+1">
+            <span *ngFor="let userComments of userComment | keyvalue">
+                <div *ngIf="userComments.value == userPosts.id">
+                <ul><li>{{ userComments.key }}</li></ul>
+                </div>
+            </span>
+        </div>
 </ul>
+</div>

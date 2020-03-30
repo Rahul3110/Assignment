@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DetailService } from '../detail.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-detail-post',
@@ -7,30 +8,58 @@ import { DetailService } from '../detail.service';
   styleUrls: ['./detail-post.component.css']
 })
 export class DetailPostComponent implements OnInit {
-  public empPost = [];
+  public userPost = [];
+  visibleIndex = 0;
   public postId;
+  public isShow = false;
+  userComment = new Map();
 
+  constructor(private detailService: DetailService,
+              private SpinnerService: NgxSpinnerService) { }
 
-  constructor(private detailService: DetailService) { }
-
-  ngOnInit() {    
-    if (this.detailService.subsVar==undefined) {    
-      this.detailService.subsVar = this.detailService.    
-      invokeFirstComponentFunction.subscribe((userId) => {    
-        this.myPost(userId);    
-      });
-    }    
-  } 
-
+  ngOnInit() {
+    if (this.detailService.subsVar == undefined) {
+      this.detailService.subsVar = this.detailService.
+      emitId.subscribe((userId) => {
+          this.myPost(userId);
+        });
+    }
+  }
+  
   myPost(userId) {
     this.detailService.getPost(userId)
-        .subscribe(data => this.empPost = data);
+      .subscribe(data => {this.userPost = data
+      this.SpinnerService.hide();
+      });
+  } 
+
+  getComments(postId) {
+    this.postId = postId;
+    this.detailService.getComment(postId).subscribe(
+      (data) => this.getCommentsForUser(data)
+    );
   }
 
-  getComments(postId){  
-    this.postId = postId;  
-    console.log("postcomponent:"+postId);
-    this.detailService.onClickComment(postId);    
-  } 
+  getCommentsForUser(userComm) {
+    for (var i = 0; i < userComm.length; i++) {
+      this.userComment.set(userComm[i].name, userComm[i].postId);
+    }
+  }
+
+  toggle(){
+    this.isShow=!this.isShow;
+    if(this.isShow){
+      return true;
+    }else
+      return false;
+  }
+
+  showSubItem(ind) {
+    if (this.visibleIndex === ind) {
+      this.visibleIndex = -1;
+    } else {
+      this.visibleIndex = ind;
+    }
+  }
 
 }

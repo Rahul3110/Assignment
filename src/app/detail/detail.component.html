@@ -1,5 +1,6 @@
-<button *ngFor="let employees of employee | keyvalue: keepOrder" 
-(click) ="firstComponentFunction(employees.value)">
-{{ employees.key }}
-</button>
-
+<div class="wrapper">
+    <button class="detail" *ngFor="let users of user | keyvalue" 
+    (click) ="userClick(users.value)">
+    {{ users.key }}
+    </button>
+</div>

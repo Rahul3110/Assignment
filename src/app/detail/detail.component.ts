@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DetailService } from '../detail.service';
-import { DetailPostComponent } from '../detail-post/detail-post.component';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-detail',
@@ -8,28 +8,32 @@ import { DetailPostComponent } from '../detail-post/detail-post.component';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-  employee = new Map();
+  user = new Map();
 
-  constructor(private detailService: DetailService) { }
+  constructor(private detailService: DetailService,
+              private SpinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.SpinnerService.show();
     this.detailService.getEmployee()
       .subscribe(
         (data) => this.split(data)
       );
   }
 
-
-
-  split(emp) {
-    for (var i = 0; i < emp.length; i++) {
-      this.employee.set(emp[i].name.split(" ")[0], emp[i].id);
+  split(usr) {
+    for (var i = 0; i < usr.length; i++) {
+      if(usr[i].name.split(" ").length < 3){
+      this.user.set(usr[i].name.split(" ")[0], usr[i].id);
+      }else {
+        this.user.set(usr[i].name.split(" ")[1], usr[i].id);
+      }
+      this.SpinnerService.hide();
     }
   }
 
-
-  firstComponentFunction(userId) {
-    this.detailService.onFirstComponentButtonClick(userId);
+  userClick(userId) {
+    this.SpinnerService.show();
+    this.detailService.onUserClick(userId);
   }
-
 }

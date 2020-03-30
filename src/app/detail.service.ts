@@ -3,28 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Info } from './info';
 import { Observable, Subscription } from 'rxjs';
 import { InfoPost } from './infopost';
+import { InfoComment } from './infoComment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DetailService {
-  // private _url: string = "https://jsonplaceholder.typicode.com/users";
-  private _url: string = "/assets/data/data.json";
+  private _url: string = "https://jsonplaceholder.typicode.com/users";
   private _urlpost: string = "https://jsonplaceholder.typicode.com/posts?userId=";
   private _urlComment: string = "https://jsonplaceholder.typicode.com/comments?postId=";
 
-  invokeFirstComponentFunction = new EventEmitter();
+  emitId = new EventEmitter();
   subsVar: Subscription;
 
-  invokeCommentFunction = new EventEmitter();
-  subsVar1: Subscription;
-
-  onFirstComponentButtonClick(userId) {
-    this.invokeFirstComponentFunction.emit(userId);
-  }
-
-  onClickComment(postId) {
-    this.invokeCommentFunction.emit(postId);
+  onUserClick(userId) {
+    this.emitId.emit(userId);
   }
 
   constructor(private http: HttpClient) { }
@@ -37,7 +30,7 @@ export class DetailService {
     return this.http.get<InfoPost[]>(this._urlpost + userId);
   }
 
-  getComment(postId): Observable<InfoPost[]> {
-    return this.http.get<InfoPost[]>(this._urlComment + postId);
+  getComment(postId): Observable<InfoComment[]> {
+    return this.http.get<InfoComment[]>(this._urlComment + postId);
   }
 }
