@@ -24,9 +24,9 @@ export class DetailComponent implements OnInit {
   split(usr) {
     for (var i = 0; i < usr.length; i++) {
       if(usr[i].name.split(" ").length < 3){
-      this.user.set(usr[i].name.split(" ")[0], usr[i].id);
+      this.user.set(usr[i].id,usr[i].name.split(" ")[0]);
       }else {
-        this.user.set(usr[i].name.split(" ")[1], usr[i].id);
+        this.user.set(usr[i].id,usr[i].name.split(" ")[1])
       }
       this.SpinnerService.hide();
     }

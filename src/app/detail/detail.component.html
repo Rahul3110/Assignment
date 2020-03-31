@@ -1,6 +1,5 @@
-<div class="wrapper">
-    <button class="detail" *ngFor="let users of user | keyvalue" 
-    (click) ="userClick(users.value)">
-    {{ users.key }}
+<div>
+    <button class="detail" *ngFor="let users of user | keyvalue" (click) ="userClick(users.key)">
+    {{ users.value }}
     </button>
 </div>

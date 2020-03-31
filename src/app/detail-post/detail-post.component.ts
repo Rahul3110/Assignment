@@ -13,6 +13,7 @@ export class DetailPostComponent implements OnInit {
   public postId;
   public isShow = false;
   userComment = new Map();
+  public showall=false;
 
   constructor(private detailService: DetailService,
               private SpinnerService: NgxSpinnerService) { }
@@ -62,4 +63,7 @@ export class DetailPostComponent implements OnInit {
     }
   }
 
+  hiddenButton(){
+    return this.showall=!this.showall;
+  }
 }
