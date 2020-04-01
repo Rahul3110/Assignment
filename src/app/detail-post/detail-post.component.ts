@@ -8,12 +8,12 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./detail-post.component.css']
 })
 export class DetailPostComponent implements OnInit {
-  public userPost = [];
-  visibleIndex = 0;
-  public postId;
-  public isShow = false;
+  private userPost: any[];
+  private visibleIndex:number = 0;
+  postId: string;
+  private isShow:boolean = false;
   userComment = new Map();
-  public showall=false;
+  private showall:boolean = false;
 
   constructor(private detailService: DetailService,
               private SpinnerService: NgxSpinnerService) { }
@@ -35,7 +35,6 @@ export class DetailPostComponent implements OnInit {
   } 
 
   getComments(postId) {
-    this.postId = postId;
     this.detailService.getComment(postId).subscribe(
       (data) => this.getCommentsForUser(data)
     );

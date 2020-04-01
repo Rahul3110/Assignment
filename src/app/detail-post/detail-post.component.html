@@ -1,6 +1,6 @@
 <div  class="user-post" *ngFor="let userPosts of userPost; let i=index">
 <ul>
-    <div [hidden]="i>3">
+    <div [hidden]="i>2">
         <li>{{ userPosts.title }}</li>
         <li>{{ userPosts.body }}</li>
         <button (click)="getComments(userPosts.id); toggle(); showSubItem(i+1)">
@@ -12,13 +12,13 @@
                 <ul><li>{{ userComments.key }}</li></ul>
                 </div>
             </span>
-        </div> 
+        </div>
     </div>
 </ul>
 </div>
 <div  class="user-post" *ngFor="let userPosts of userPost; let i=index">
     <ul>
-        <div *ngIf="i>3" [hidden]="!showall">
+        <div *ngIf="i>2" [hidden]="!showall">
             <li>{{ userPosts.title }}</li>
             <li>{{ userPosts.body }}</li>
             <button (click)="getComments(userPosts.id); toggle(); showSubItem(i+1)">
